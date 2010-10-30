@@ -131,7 +131,7 @@ const int32_t NumRFSizes = 16;
 const int32_t FilterBankSize = NumOrientations * NumRFSizes;
 const int32_t NumGrayValues = 1 << IPL_DEPTH_8U;
 const int32_t C1Size = (NumOrientations * NumRFSizes) / 2;
-const int32_t NumTrainingImages = 60;
+const int32_t NumTrainingImages = 5;
 const int32_t NumPatchSizes = 4;
 const int32_t NumBands = NumRFSizes / 2;
 const int32_t PatchSizes[NumPatchSizes] = {4,8,12,16};
@@ -385,6 +385,8 @@ class GaborFilterModel
 	void trainCarFilter();
 	void testCarFilter();
 	void svmtrain(const string & svmtrfilenm, const string &svmmodelfilenm);
+	void SP(void);
+	void sortS2(const string &c2file, const string &c2filesorted);
 
 
 };

@@ -1,14 +1,18 @@
+OCTAVE_LIB="/usr/lib/octave-3.2.3"
+OCTAVE_INCL="/usr/include/octave-3.2.3"
+OPENMPI_INC="/usr/include/openmpi/"	
 CC=mpicxx
 CFLAGS=-Wall --ansi -O3 -fopenmp 
 CFLAGS2=-Wall --ansi -O0 -fopenmp 
 #CFLAGS=-Wall -Werror --ansi -O3 -fopenmp
 #OPT=-ftree-loop-linear -ftree-loop-im -funswitch-loops -funroll-loops -ftree-vectorize -msse3 -march=athlon64 -m64
 #OPT=-ftree-loop-linear -ftree-loop-im -funswitch-loops -funroll-loops -ftree-vectorize -msse3 -march=native -m32
-OPT=-ftree-loop-linear -ftree-loop-im -funswitch-loops -funroll-loops -ftree-vectorize -msse3 -march=athlon64 -m64
+#OPT=-ftree-loop-linear -ftree-loop-im -funswitch-loops -funroll-loops -ftree-vectorize -msse3 -march=athlon64 -m64
+OPT=-ftree-loop-linear -ftree-loop-im -funswitch-loops -funroll-loops -ftree-vectorize -msse3 -march=native
 DEBUG=-ftree-vectorizer-verbose=2 -g -pg -D _DEBUG
 DEBUG2=-g -pg -D _DEBUG
-LIBS=-L /usr/lib64 -L /usr/lib -L /usr/lib64/octave-3.0.3 -lcv -lcvaux -lml -lhighgui -lm -lgomp -lboost_filesystem -loctave
-INCLUDES=-I/usr/include/opencv -I . -I /usr/include/octave-3.0.3/ -I /usr/include/openmpi/1.2.4-gcc/
+LIBS=-L /usr/lib -L /usr/lib64 -L /usr/local/lib -L $(OCTAVE_LIB) -lcv -lcvaux -lml -lhighgui -lm -lgomp -lboost_filesystem -loctave
+INCLUDES=-I/usr/local/include/opencv -I . -I $(OCTAVE_INCL) -I $(OPENMPI_INC)
 SOURCES1=ParameterExtractor.cpp emd.c GaborFilterModel.cpp GaborFilterModel2.cpp CarClassifier1.cpp CarClassifier2.cpp SPCarFilter.cpp dir.cpp
 HEADERS1=ParameterExtractor.h dir.h GaborFilterModel.h sdd_include.h emd.h
 OBJS1=ParameterExtractor.o emd.o GaborFilterModel.o GaborFilterModel2.o CarClassifier1.o CarClassifier2.o SPCarFilter.o dir.o
@@ -60,4 +64,3 @@ unsupervised:
 
 clean:
 	rm -f $(OBJS1) $(TARGET1) createAdjMatrix.oct loadvectors.oct createAdjMatrix.o loadvectors.o
-

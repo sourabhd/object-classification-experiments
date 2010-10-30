@@ -508,6 +508,7 @@ void GaborFilterModel::readKeyFile(const string &kfile_)
 
 		filename.clear();
 		category.clear();
+		categorylist.clear();
 		std::string line = "";
 		std::string prevcat = "_sentinel_";
 		while (true)
@@ -3680,6 +3681,17 @@ void GaborFilterModel::svmtrain(const string & svmtrfilenm, const string &svmmod
 	perror(0); // Report error if any in the system call
 }
 
+void GaborFilterModel::sortS2(const string &s2fileun, const string &s2filesorted)
+{
+	assert(s2fileun != s2filesorted);
+	stringstream sortcmdstr;
+	sortcmdstr <<  "sort -n " 
+		<<  s2fileun << " > " << s2filesorted;
+	string sortcmd = sortcmdstr.str();
+	CERR << sortcmd.c_str() << endl;
+	system(sortcmd.c_str()); // Execute sort command
+	perror(0); // Report error if any in the system call
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /** Basic implementation of a Serre Poggio Algorithm (Driver program) */
@@ -3695,9 +3707,16 @@ void GaborFilterModel::basicSerrePoggio()
 }
 
 
+void GaborFilterModel::SP()
+{
+	trainCarFilter();
+	testCarFilter();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-#if 0
+
 int main(int argc,char *argv[])
 {
 
@@ -3713,8 +3732,8 @@ int main(int argc,char *argv[])
 
 	TIME(tstart);
 	std::string conffl(argv[1]);
-	GaborFilterModel gfm(conffl.c_str());
-	//gfm.basicSerrePoggio();
+	GaborFilterModel gfm(conffl.c_str(),"version2");
+	gfm.SP();
 	//gfm.createAllPatches();
 	//gfm.createAllPatchesTrain();
 	//gfm.createOverlappingGridPatches();
@@ -3730,7 +3749,7 @@ int main(int argc,char *argv[])
 	//gfm.fillS2PatchesWithRandomNumbers();
 	//gfm.runKernelEMD();
 	//gfm.calcEMDDirectly();
-	gfm.convC2ToSVM("/mnt/output/Caltech101AndCarsOutput/ccars.c2","/mnt/output/Caltech101AndCarsOutput/ccars.svmin",6480);
+	//gfm.convC2ToSVM("/mnt/output/Caltech101AndCarsOutput/ccars.c2","/mnt/output/Caltech101AndCarsOutput/ccars.svmin",6480);
 	TIME(tend);
 	CERR << "The program ran for " << difftime(tstart,tend) << " ms" << endl; 
 
@@ -3742,4 +3761,4 @@ int main(int argc,char *argv[])
 
 	return 0;
 }
-#endif
+
