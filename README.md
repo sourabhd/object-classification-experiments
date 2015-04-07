@@ -1,0 +1,91 @@
+# object-classification-experiments
+Automatically exported from code.google.com/p/object-classification-experiments
+
+SerrePoggioClassifier
+---------------------
+
+Author
+------
+
+Sourabh Daptardar <saurabh.daptardar@gmail.com>
+
+Version
+-------
+
+1.0
+
+LICENSE
+-------
+
+SerrePoggioClassifier is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SerrePoggioClassifier is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SerrePoggioClassifier.  If not, see <http://www.gnu.org/licenses/>.
+
+DESCRIPTION
+-----------
+
+This code has been developed in partial fulfillment of the M.Tech thesis
+"Explorations on a neurologically plausible model of image object classification"
+by Sourabh Daptardar, Y7111009, CSE, IIT Kanpur.
+
+Project website: http://www.cse.iitk.ac.in/users/vision/sourabhd/
+
+
+This code implements:
+1) Biologically inspired model of Serre-Wolf-Poggio 
+http://cbcl.mit.edu/projects/cbcl/publications/ps/serre-PID73457-05.pdf
+and a number of variations with the model.
+
+2) Unsupervised normalized graph cut (Shi-Malik algorithm) based clustering technique (Split-Merge approach).
+
+3) Downloader uitility for downloading images from Google Image Search
+
+PROGRAMMING LANGUAGES
+----------------------
+
+1) C++
+
+2) Octave
+
+3) Python
+
+
+DEPENDENCIES
+------------
+
+1) Boost
+
+2) OpenCV
+
+3) OpenMP (libgomp)
+
+4) OpenMPI
+
+5) liboctave
+
+6) Yossi Rubner's implementation of Earth Mover's distance: http://vision.stanford.edu/~rubner
+   Two files emd.c emd.h included here are from Rubner's code.
+
+USAGE
+------
+
+1) Serre-Poggio model related experiments / generation of C2 feature vectors:
+
+   make
+
+2) Split-Merge graph clustering algorithm:
+
+   make unsupervised
+
+3) Downloader
+
+   python downloadCarDataset.py
